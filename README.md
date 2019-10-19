@@ -24,3 +24,9 @@ You can't always devide a parallelogram (a fabric) in equal pieces, the purpose 
 </p>
 
 This code is written in javascript (p5js) and you can try it [here](https://editor.p5js.org/cavallogianmarco/sketches/1c1RiSLlk).
+
+## Authors ❤️
+  
+  - **Gianmarco Cavallo** (ladvace) - [Github Profile](https://github.com/Ladvace)
+
+### If you have any problems or question/features feel free to contact me! 🔧😃

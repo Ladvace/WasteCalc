@@ -44,6 +44,10 @@ class rectPolygon {
   }
 }
 
+let rectangles = [];
+let greenSquares = [];
+let redSquares = [];
+
 function incrementRects(i, size) {
   let rectangle = 0;
   let sum = 0;
@@ -52,15 +56,7 @@ function incrementRects(i, size) {
   } else return i * size;
 }
 
-function drawRects(
-  fabricX,
-  fabricY,
-  ht,
-  wd,
-  rectangles,
-  greenSquares,
-  redSquares
-) {
+function drawRects(fabricX, fabricY, ht, wd) {
   let rectNumX = fabricX / wd;
   let rectNumY = fabricY / ht;
   for (i = 0; i < rectNumY; i++) {
@@ -79,48 +75,52 @@ function drawRects(
         rectangles[i].getLastY() > fabricY
       ) {
         rectangles[i].setColor("red");
-        //redSquares = redSquares.concat(rectangles[i]);
-        //console.log(greenSquares[i]);
+        redSquares = redSquares.concat(rectangles[i]);
+        // console.log(greenSquares[i]);
       } else {
         rectangles[i].setColor("green");
-        //greenSquares = greenSquares.concat(rectangles[i]);
-        //console.log(greenSquares[i]);
+        greenSquares = greenSquares.concat(rectangles[i]);
+        // console.log(greenSquares[i]);
       }
     }
   }
 }
-/*
-function filterColor(array, param, ){
-  let filteredArr = []; 
-  for (i = 0; i < array.length; i++){
-    if(array[i].getColor() == param){
+
+function filterColor(array, param) {
+  let filteredArr = [];
+  for (i = 0; i < array.length; i++) {
+    if (array[i].getColor() == param) {
       filteredArr = filteredArr.concat(array[i]);
-      console.log(array, param);   
+      console.log(array, param);
     }
   }
   return filteredArr;
 }
 
-function calcTotArea(areas){
+function calcTotArea(areas) {
   let total = 0;
-  for (i = 0; i< areas.length; i++){
-    total = areas[i] + total; 
+  for (i = 0; i < areas.length; i++) {
+    total = areas[i] + total;
   }
   return total;
 }
 
-function calcWaste(rectangles){
-  let totalArea = width*height
+function calcWaste(rectangles) {
+  let totalArea = width * height;
   let green = filterColor(rectangles, "green");
   let avalaibleArea = calcTotArea(green);
   let waste = totalArea - avalaibleArea;
-  
-  console.log(waste, totalArea, avalaibleArea, green);
 }
-*/
+
 let fabricX = 400;
 let fabricY = 400;
-let sizeXInput, sizeYInput, button, rectXInput, rectYInput, rectWidth, rectHeight;
+let sizeXInput,
+  sizeYInput,
+  button,
+  rectXInput,
+  rectYInput,
+  rectWidth,
+  rectHeight;
 
 function setup() {
   //dimensione tessuto
@@ -129,22 +129,30 @@ function setup() {
 
   sizeXInput = createInput().attribute("placeholder", "Lunghezza");
   sizeXInput.position(0, 10);
-  
+
   sizeYInput = createInput().attribute("placeholder", "Altezza");
   sizeYInput.position(200, 10);
 
-  rectXInput = createInput().attribute("placeholder", "Lunghezza rettangoli/quadrati da tagliare");
+  rectXInput = createInput().attribute(
+    "placeholder",
+    "Lunghezza rettangoli/quadrati da tagliare"
+  );
   rectXInput.position(0, 50);
 
-  rectYInput = createInput().attribute("placeholder", "Altezza rettangoli/quadrati da tagliare");
+  rectYInput = createInput().attribute(
+    "placeholder",
+    "Altezza rettangoli/quadrati da tagliare"
+  );
   rectYInput.position(200, 50);
-
 
   // fabricY = sizeYInput.value();
 
   button = createButton("Genera");
   button.position(390, 10);
   button.mousePressed(windowResized);
+
+  fill(255, 255, 255);
+  text("word", 420, 10);
 }
 
 function windowResized() {
@@ -154,18 +162,15 @@ function windowResized() {
   rectHeight = rectYInput.value();
   console.log(x, y);
   // if (x != null && y != null) {
-    resizeCanvas(x, y);
+  resizeCanvas(x, y);
+  calcWaste(redSquares, greenSquares, rectangles);
   // }
 }
 
 function draw() {
   background(220);
-  let rectangles = [];
-  let greenSquares = [];
-  let redSquares = [];
   console.log(rectangles);
   //new rectPolygon(50, 100, 0, 0).display();
   //dimensione parte da tagliare
-  drawRects(width, height, 75, 75, rectangles, greenSquares, redSquares);
-  //calcWaste( redSquares, greenSquares, rectangles);
+  drawRects(width, height, 75, 75);
 }

@@ -18,6 +18,9 @@
     "demo",
     "p5.js"
   ],
+  "resolutions": {
+    "ajv": "6.9.1"
+  },
   "author": "Jose Luis Garcia del Castillo",
   "license": "tbd",
   "devDependencies": {
@@ -31,13 +34,8 @@
   "build": {
     "appId": "com.electron.fwc",
     "win": {
-      "files": [
-        "./build/**/*"
-      ],
-      "icon": "build/assets/ruler.png",
       "target": "portable",
-      "buildResources": "assets",
-      "asarUnpack": "**/assets/*"
+      "icon": "build/ruler.png"
     }
   }
 }

@@ -68,7 +68,9 @@ function drawRects(
       let rectNX = incrementRects(x, wd);
       let rectNY = incrementRects(i, ht);
 
+      console.log( "paolo", ht, wd, rectNX, rectNY)
       rectangles[i] = new rectPolygon(ht, wd, rectNX, rectNY);
+      console.log( "test", rectangles, rectangles.length, rectangles[i])
       textSize(11);
       fill(0, 0, 0);
       text(`${i} ${x}`, rectNX, rectNY - 10);
@@ -79,12 +81,12 @@ function drawRects(
         rectangles[i].getLastY() > fabricY
       ) {
         rectangles[i].setColor("red");
-        //redSquares = redSquares.concat(rectangles[i]);
-        //console.log(greenSquares[i]);
+        redSquares = redSquares.concat(rectangles[i]);
+        console.log( "red",greenSquares[i]);
       } else {
         rectangles[i].setColor("green");
-        //greenSquares = greenSquares.concat(rectangles[i]);
-        //console.log(greenSquares[i]);
+        greenSquares = greenSquares.concat(rectangles[i]);
+        console.log("green", greenSquares[i]);
       }
     }
   }
@@ -126,17 +128,17 @@ let sizeXInput,
   rectXInput,
   rectYInput,
   rectWidth,
-  rectHeight;
+  rectHeight,
+  p;
 
 function setup() {
-  //dimensione tessuto
+  p = createP("CIAO")
   createCanvas(fabricX, fabricY);
   noLoop();
-
-  sizeXInput = createInput().attribute("placeholder", "Lunghezza");
+  sizeXInput = createInput().attribute("placeholder", "Lunghezza tessuto");
   sizeXInput.position(0, 10);
 
-  sizeYInput = createInput().attribute("placeholder", "Altezza");
+  sizeYInput = createInput().attribute("placeholder", "Altezza tessuto");
   sizeYInput.position(200, 10);
 
   rectXInput = createInput().attribute(
@@ -186,7 +188,7 @@ function draw() {
   let rectangles = [];
   let greenSquares = [];
   let redSquares = [];
-  console.log(rectangles);
+  console.log(rectangles.length);
   //new rectPolygon(50, 100, 0, 0).display();
   //dimensione parte da tagliare
   drawRects(width, height, 75, 75, rectangles, greenSquares, redSquares);
